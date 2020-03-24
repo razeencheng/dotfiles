@@ -1,0 +1,791 @@
+"  repo: https://github.com/razeencheng/dotfiles/macvim
+"  email: me@razeen.me
+
+" 关闭vi的兼容模式(兼容模式下会让vim关闭所有的扩展，丢掉vim很多强大的功能去兼容vi)
+set nocompatible
+
+" filetype vim会对文件自动检测文件类型;
+" plugin 会在Vim的运行时环境目录下加载该类型相关的插件;
+"   比如为了让Vim更好的支持Python编程，需要下载一些Python相关的插件，此时就必须设置plugin为on;
+" indent 不同类型文件有不同的缩进方式;
+"   如Python就要求使用4个空格作为缩进,c使用两个tab作为缩进;
+"   那么indent就可以为不同文件类型选择合适的缩进方式了;
+"   在Vim的安装目录的indent目录下看到定义了很多缩进相关的脚本
+filetype plugin indent on
+
+
+" rtp 即 vim runtime path
+"   把vim bundle加入rtp
+set rtp+=~/.vim/bundle/Vundle.vim
+
+" 插件开始的位置
+call vundle#begin()
+
+" Vundle插件管理
+Plugin 'VundleVim/Vundle.vim'
+
+" 导航目录侧边栏
+Plugin 'scrooloose/nerdtree'
+" 使nerdtree tab标签的名称更友好
+Plugin 'jistr/vim-nerdtree-tabs'
+" nerdtree中看git版本信息
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" 代码自动补全(需要额外配置）
+Plugin 'Valloric/YouCompleteMe'
+" 下面两个配合 生成代码片段 
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+" Python自动补全
+Plugin 'davidhalter/jedi-vim'
+" 符号自动补全
+Plugin 'Raimondi/delimitMate'
+
+" 文件搜索, 快速跳转文件
+Plugin 'ctrlpvim/ctrlp.vim'
+" 全局搜索
+Plugin 'dyng/ctrlsf.vim'
+" 大纲式导航(右边出现的那个导航的）
+Plugin 'majutsushi/tagbar'
+" 内容搜索
+Plugin 'rking/ag.vim'
+" 快速移动（跳转）
+Plugin 'Lokaltog/vim-easymotion'
+" 成对标签跳转
+Plugin 'vim-scripts/matchit.zip'
+
+" 快速注释
+Plugin 'tomtom/tcomment_vim'
+" 成对符号编辑(快速给词加环绕符号,例如单引号/双引号/括号/成对标签等)
+Plugin 'tpope/vim-surround'
+" 多光标操作(类似sublimetext的多光标选中)
+Plugin 'terryma/vim-multiple-cursors'
+
+" 语法检查(支持大部分语言）
+Plugin 'vim-syntastic/syntastic'
+" 快速对齐
+Plugin 'junegunn/vim-easy-align'
+" Python开发插件
+Plugin 'klen/python-mode'
+" Lua开发插件
+Plugin 'xolox/vim-lua-ftplugin'
+" Lua缩进插件
+Plugin 'raymond-w-ko/vim-lua-indent'
+" Go开发插件
+Plugin 'fatih/vim-go'
+" Vue开发插件
+Plugin 'posva/vim-vue'  
+" 杂项自动加载
+Plugin 'xolox/vim-misc'
+" 集成各种git操作
+Plugin 'tpope/vim-fugitive'
+" gitk
+Plugin 'gregsexton/gitv'
+" git差比对
+Plugin 'airblade/vim-gitgutter'
+" 状态栏增强显示
+Plugin 'bling/vim-airline'
+" 配色插件（深色/浅色）
+Plugin 'noahfrederick/vim-hemisu'
+" 配色
+Plugin 'tomasr/molokai'
+" 颜色主题
+Plugin 'zaki/zazen'
+
+" 插件结束的位置
+call vundle#end()
+
+" 插件简要使用
+" :PluginList       - 插件列表
+" :PluginInstall    - 安装插件; 加!表示更新
+" :PluginSearch foo - 搜索插件 foo; 加!刷新本地缓存
+" :PluginClean      - 移除插件; 加!不需要确认
+
+
+" 对所有缓冲区中的文件启用语法高亮度
+syntax on
+" 使用bash作为默认shell环境
+set shell=bash
+" 定义快捷键的前缀
+let mapleader = ','
+
+" 关闭欢迎页面
+set shortmess=atI
+"被分割窗口之間顯示空白
+set fillchars=vert:/
+
+" 保存历史命令行数
+set history=1000
+" 关闭swap
+set noswapfile
+" 关闭备份
+set nobackup
+" 关闭vim bb声
+set noerrorbells
+" 高亮当前行
+set cursorline
+" 高亮当前列
+" set cursorcolumn
+" 关闭鼠标
+" set mouse-=a
+" 控制vim剪贴板
+set clipboard+=unnamed
+" 允许在插入模式下对所有内容进行退格
+set backspace=indent,eol,start
+" 行间距
+set linespace=0
+" 刷新率100ms ?
+set updatetime=100
+" 在新Tab中打开新的缓冲区
+set switchbuf=usetab,usetab
+" 搜索时 忽略这些文件/夹
+set wildignore+=*/.git/*,
+      \*/.hg/*,*/.svn/*,
+      \*/cscope*,*/*.csv/,
+      \*/*.log,*tags*,*/bin/*
+
+" 在最下面状态栏显示正在输入的命令
+set showcmd
+" 在左下角的状态栏显示 --INSERT-- 之类的状态
+set showmode
+" 显示行号
+set number
+" 行号显示宽度
+set numberwidth=4
+" 当输入一个左括号时自动匹配右括号
+set showmatch
+" 关闭Preview窗口
+set completeopt-=preview
+
+" 增强自带的 ? 和 ／ 搜索功能， 并且支持更加高级的正则表达式匹配
+set incsearch
+" 高亮搜索内容
+set hlsearch
+" 查找忽略大小写
+set ignorecase
+" 如果有一个大写字母，则切换到大小写敏感查找
+set smartcase
+
+" 自动缩进所使用的空白长度
+set shiftwidth=4
+" 按下tab键，插入的是空格和tab制表符的混合
+set softtabstop=4
+" 空格代替Tab
+set expandtab
+" 自动缩进，新增加的行和前一行使用相同的缩进形式
+set autoindent
+" 每一行都和前一行有相同的缩进量，同时能正确的识别出花括号，当遇}，取消缩进形式
+set smartindent
+
+" 默认的字符编码
+set encoding=utf-8
+" 自动识别文件编码
+set fileencodings=utf-8,ucs-bom,gbk,gb2312,gb18030,default
+" 文本格式优先unix风格
+set fileformats=unix,dos,mac
+" 文本格式化选项
+" t：根据 textwidth 自动折行
+" c：在（程序源代码中的）注释中自动折行，插入合适的注释起始字符
+" r：插入模式下在注释中键入回车时，插入合适的注释起始字符
+" q：允许使用“gq”命令对注释进行格式化
+" o: 如果当前有注释，用O，o时自动插入注释
+" w: 尾部白色空格代表下一行继续，非白色表示一个段落的结尾
+set formatoptions+=tcroqw
+
+" 向右切分窗口
+set splitright
+" 向下切分窗口
+set splitbelow
+
+" 自动保存
+set autowrite
+" 自动读取文件(如果文本改变，自动更新）
+set autoread
+" 始终显示状态栏（倒数第二行）
+set laststatus=2
+
+" 主题设置
+" GUI的一些可选参数
+set guioptions=''
+" 背景颜色
+set background=dark
+" 配色 terminal Color 256色
+set t_Co=256
+" 字体
+set guifont=CamingoCode\ Regular:h15
+" 主题
+colorscheme molokai
+" colorscheme solarized
+" colorscheme desert
+
+" 切换buffer(文件/tab)的时候, 之前编辑的文件就只是切换到后台, 而不是关掉,还可以回切
+set hidden
+" 自动补全的模式（显示可能匹配的列表,并使用最长的子串进行补全)
+set wildmode=list:longest
+" 快速滚动
+set ttyfast
+
+" 文本折叠
+" 开启折叠
+set foldenable
+" 折叠方式（安装缩进折叠）
+set foldmethod=indent
+" 折叠级别
+set foldlevel=99
+
+" 设置折叠的快捷键
+" 我这里就是 ,zz
+" 第一次 ,zz 折叠，再一次就展开
+let g:FoldMethod = 0
+map <leader>zz :call ToggleFold()<CR>
+fun! ToggleFold()
+    if g:FoldMethod == 0
+        exe "normal! zM"
+        let g:FoldMethod = 1
+    else
+        exe "normal! zR"
+        let g:FoldMethod = 0
+    endif
+endfun
+
+
+" 在Visual/Select模式下的一些成对字符插入快捷键
+" 如你选择  hellworld 然后按下"号，就会成对加上" 变成 "helloworld"
+vmap " S"
+vmap ' S'
+vmap ` S`
+vmap [ S[
+vmap ( S(
+vmap { S{
+vmap } S}
+vmap ] S]
+vmap ) S)
+  
+" 多个窗口 用Ctr加 jkhl切换
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+  
+" 普通模式下 shift + h/l 快速切换缓冲区
+nmap <S-H> :bp<CR>
+nmap <S-L> :bn<CR>
+
+" 快速切换多个标签页
+" ,1 到第一个标签页
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<CR>
+
+" 开启相对行号
+set relativenumber
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd InsertLeave * setlocal relativenumber
+    autocmd InsertEnter * setlocal norelativenumber
+    autocmd BufEnter * setlocal cursorline
+    autocmd BufLeave * setlocal nocursorline
+    " autocmd CompleteDone *.go  call OnGolangCompleteDone()
+augroup END
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber number
+    else
+        set relativenumber
+    endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<CR>
+
+" 自动记住上次位置
+autocmd BufReadPost *
+    \ if line("'\"")>0&&line("'\"")<=line("$") |
+    \   exe "normal g'\"" |
+    \ endif
+
+" auto load vimrc
+" autocmd! BufWritePost .vimrc source %
+
+autocmd BufNewFile,BufRead *.define setf define
+" 针对不同的文件类型 设置不同格式
+" go中，不用空格代理Tab
+autocmd FileType go :set tabstop=4 noexpandtab " Do not use spaces instead of tabs
+" cpp c 缩进空格长度为4 用空格代替Tab
+autocmd FileType c,cpp :set shiftwidth=4 expandtab
+" lua 缩进空格长度为4 
+autocmd FileType lua :set shiftwidth=4 
+" sh 缩进空格长度为2 空格代理Tab
+autocmd FileType sh :set shiftwidth=2 expandtab
+" py 缩进空格长度为4 空格代理Tab 自动缩进
+autocmd FileType python :set tabstop=4 shiftwidth=4 expandtab ai
+" ruby,javascript,html,css,xml 缩进空格长度为2 空格代理Tab 自动缩进
+autocmd FileType ruby,javascript,html,css,xml :set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+
+
+" 热键设置
+" w!! 用sudo权限保存文件
+cmap w!! %!sudo tee > /dev/null %
+" ,/ 移除搜索高亮
+noremap <silent><leader>/ :nohls<CR>
+" ,sa 选择全部
+map <leader>sa ggvG$
+" ,w 保存当前文件
+nnoremap <leader>w :w<CR>
+" ; -> :
+nnoremap ; :
+" 修复ctags ctrl+]无效问题
+nmap <c-]> g<c-]>
+
+" inoremap <esc> <esc>:set iminsert=0<cr>
+" nmap <expr> <c-j> &diff ? ']c' : '<c-j>'
+" nmap <expr> <c-k> &diff ? '[c' : '<c-k>'
+
+" 隐藏文本设置
+if has('conceal')
+    set conceallevel=2 concealcursor=niv
+endif
+
+" ,bd 关闭但前缓冲区, 不关闭窗口
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
+
+" GUI设置
+if has("gui_macvim")
+"透明
+set transparency=10 
+" " fullscreen
+" set fullscreen
+
+" Command + r/R 搜索
+let g:ctrlp_map = '<D-p>'
+nmap <D-r> :CtrlPBufTag<CR>
+imap <D-r> <esc>:CtrlPBufTag<CR>
+nmap <D-R> :CtrlPBufTagAll<CR>
+imap <D-R> <esc>:CtrlPBufTagAll<CR>
+
+" Command + / 加注释
+map <D-/> :TComment<CR>
+vmap <D-/> :TComment<CR>g
+
+" ,f 快速搜索
+nmap <D-f> :CtrlSF <C-R>=expand("<cword>")<CR>
+imap <D-f> <ESC>:CtrlSF <C-R>=expand("<cword>")<CR>
+vnoremap <D-f>  y :CtrlSF"<C-R>=escape(@", '\\/.*$^~[]()"')<CR>"
+
+" Commond e 显示/关闭 NERDTree
+map <D-e> :NERDTreeTabsToggle<CR>
+map <leader>e :NERDTreeFind<CR><CR>
+
+" window上改几个按键
+" map <D-j> <C-W>j
+" map <D-k> <C-W>k
+" map <D-l> <C-W>l
+" map <D-h> <C-W>h
+endif
+
+" python 设置
+" macvim with --with-python3
+let g:pymode_python = 'python3'
+" close syntax when save file
+let g:pymode_lint_on_write = 0
+
+" vim-go 设置
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+let g:go_list_type = "quickfix"
+let g:go_def_mode = 'godef'
+
+" go 相关快捷键
+nmap <Leader>goc :GoErrCheck<CR>
+nmap <Leader>gob :GoBuild<CR>
+nmap <Leader>god :GoDoc<CR>
+nmap <Leader>got :GoTest<CR>
+nmap <Leader>goi :GoInstall<CR>
+nmap <Leader>gor :GoRename<CR>
+nmap <Leader>gol :GoLint<CR>
+
+" function! OnGolangCompleteDone()
+"     if !exists('v:completed_item') || empty(v:completed_item)
+"         return
+"     endif
+"
+"     let complete_str = v:completed_item.word
+"     if complete_str == ''
+"         return
+"     endif
+"
+"     let line = getline('.')
+"     let next_char = line[col('.')-1]
+"     if  next_char == "("
+"         return
+"     end
+"     let cur_char =line[col('.')-2]
+"
+"     let abbr = v:completed_item.abbr
+"     let startIdx = match(abbr,"(")
+"     let endIdx = match(abbr,")")
+"     if endIdx - startIdx > 1
+"         let argsStr = strpart(abbr, startIdx+1, endIdx - startIdx -1)
+" 	  let argsList = split(argsStr, ",")
+" 	  let snippet = ""
+" 	  if cur_char != "("
+"             let snippet = "("
+" 	  end
+" 	  let c = 1
+" 	  for i in argsList
+" 	      if c > 1
+" 	          let snippet = snippet. ", "
+"             endif
+"             " strip space
+"             let arg = substitute(i, '^\s*\(.\{-}\)\s*$', '\1', '')
+"             let snippet = snippet . '${'.c.":".arg.'}'
+"             let c += 1
+"         endfor
+"         let snippet = snippet . ")$0"
+"         call UltiSnips#Anon(snippet)
+"     endif
+" endfunction
+
+
+" NERDTree 设置
+let g:NERDTreeDirArrows = 0
+let g:nerdtree_tabs_open_on_gui_startup = 0
+let NERDTreeIgnore=['node_modules']
+
+
+" nerdtree-git-plugin 一些git状态符号
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+" 状态栏设置
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='dark'
+let g:airline_powerline_fonts=0
+let g:airline#extensions#tabline#exclude_preview = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
+let g:airline#extensions#bufferline#enabled = 1
+
+" cscope 
+if has("cscope")
+    " set csprg=/usr/local/bin/cscope
+    set csto=0
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+        " else add database pointed to by environment
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    set csverb
+    nmap <D-[> :cs find c <C-R>=expand("<cword>")<CR><CR><C-O>:copen<CR>
+    nmap <D-\> :cs find s <C-R>=expand("<cword>")<CR><CR><C-O>:copen<CR>
+    nmap <D-]> :cs find g <C-R>=expand("<cword>")<CR><CR>
+end
+
+
+" Command y 开启大纲导航
+map <D-y> :TagbarToggle<CR>
+" 大纲导航设置
+let g:tagbar_autofocus=1
+let g:tagbar_sort=0
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+
+" 搜索设置
+" 忽略文件
+" MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     
+" Windows
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  
+" search anything (in files, buffers and MRU files at the same time.)
+let g:ctrlp_cmd = 'CtrlPMixed'               
+let g:ctrlp_by_filename = 1
+" search for nearest ancestor like .git, .hg, and the directory of the current file
+let g:ctrlp_working_path_mode = 'ra'         
+" show the match window at the top of the screen
+let g:ctrlp_match_window_bottom = 1          
+" maxiumum height of match window
+let g:ctrlp_max_height = 10                  
+" jump to a file if it's open already
+let g:ctrlp_switch_buffer = 'Et'             
+" enable caching
+let g:ctrlp_use_caching = 1                  
+" speed up by not removing clearing cache evertime
+let g:ctrlp_clear_cache_on_exit=1            
+" number of recently opened files
+let g:ctrlp_mruf_max = 250                   
+let g:ctrlp_open_new_file = 't'
+let g:ctrlp_open_multiple_files = 't'
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](\.git|\.hg|\.svn|\.build|github.com|labix.org|bin|pkg)$',
+    \ 'file': '\v(\.exe|\.so|\.dll|\.a|\.xls|\.csv|\.json|\.log|\.out|gs|gw|gm|tags|gotags|\/U)$',
+    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+    \ }
+let g:ctrlp_buftag_types = {
+    \ 'go'         : '--language-force=go --golang-types=ftv',
+    \ 'as'         : '--language-force=actionscript --actionscript-types=fpvc',
+    \ 'actionscript': '--language-force=actionscript --actionscript-types=fpvc',
+    \ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
+    \ 'markdown'   : '--language-force=markdown --markdown-types=hik',
+    \ 'objc'       : '--language-force=objc --objc-types=mpci',
+    \ 'rc'         : '--language-force=rust --rust-types=fTm'
+    \ }
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtBS()':              ['<bs>', '<c-]>'],
+    \ 'PrtDelete()':          ['<del>'],
+    \ 'PrtDeleteWord()':      ['<c-w>'],
+    \ 'PrtClear()':           ['<c-u>'],
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
+    \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
+    \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
+    \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
+    \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
+    \ 'PrtHistory(-1)':       ['<c-n>'],
+    \ 'PrtHistory(1)':        ['<c-p>'],
+    \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+    \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+    \ 'AcceptSelection("t")': ['<c-t>'],
+    \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
+    \ 'ToggleFocus()':        ['<s-tab>'],
+    \ 'ToggleRegex()':        ['<c-r>'],
+    \ 'ToggleByFname()':      ['<c-d>'],
+    \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
+    \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
+    \ 'PrtExpandDir()':       ['<tab>'],
+    \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
+    \ 'PrtInsert()':          ['<c-\>'],
+    \ 'PrtCurStart()':        ['<c-a>'],
+    \ 'PrtCurEnd()':          ['<c-e>'],
+    \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
+    \ 'PrtCurRight()':        ['<c-l>', '<right>'],
+    \ 'PrtClearCache()':      ['<F5>'],
+    \ 'PrtDeleteEnt()':       ['<F7>'],
+    \ 'CreateNewFile()':      ['<c-y>'],
+    \ 'MarkToOpen()':         ['<c-z>'],
+    \ 'OpenMulti()':          ['<D-o>'],
+    \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
+    \ }
+
+
+" 语法检查
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_check_on_wq=1
+let g:syntastic_auto_jump=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_error_symbol = "▶▶"
+let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_sh_checkers = ['shellcheck']
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_go_checkers = ['errcheck']
+" passive
+let g:syntastic_mode_map = { "mode": "active",
+    \ "active_filetypes": ["ruby", "go", "python"],
+    \ "passive_filetypes": ["shell"] }
+
+" 全局查找
+command! CO CtrlSFOpen
+let g:ctrlsf_winsize = '30%'
+let g:ctrlsf_auto_close = 1
+let g:ctrlsf_ignore_dir = ['vendor', 'bower_components', 'node_modules']
+
+" YouCompleteMe 自动补全
+" preview window settiing
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" typing 2 chars
+let g:ycm_min_num_of_chars_for_completion = 2
+" Completion when typing inside comments
+let g:ycm_complete_in_comments = 1  
+" Query the UltiSnips plugin
+let g:ycm_use_ultisnips_completer = 1 
+" Collect identifiers from strings and comments and tag fiels
+let g:ycm_collect_identifiers_from_comments_and_strings = 1   
+let g:ycm_collect_identifiers_from_tags_files = 1
+" some symbols
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>*'
+" Specifies Python interpreter to run jedi
+let g:ycm_python_binary_path = 'python3'
+" Seed its identifier database
+" let g:ycm_seed_identifiers_with_syntax=1
+" youcompleteme select keys
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+" Where GoTo* commands result should be opened, same-buffer
+let g:ycm_goto_buffer_command = 'horizontal-split'
+" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+" ,jd
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" ,gd
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+" ycm 配置
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+" blacklist
+let g:ycm_filetype_blacklist = {
+    \ 'gitcommit' : 1,
+    \ 'tagbar' : 1,
+    \ 'qf' : 1,
+    \ 'notes' : 1,
+    \ 'markdown' : 1,
+    \ 'unite' : 1,
+    \ 'text' : 1,
+    \ 'vimwiki' : 1,
+    \ 'pandoc' : 1,
+    \ 'infolog' : 1,
+    \ 'mail' : 1
+    \}
+
+
+" 代码片段
+let g:UltiSnipsExpandTrigger       = "<TAB>"
+let g:UltiSnipsJumpForwardTrigger  = "<TAB>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-TAB>"
+let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips'
+" ,us 修改当前文件类型的代码片段
+map <leader>us :UltiSnipsEdit<CR>
+
+" ctrl+j/k
+func! g:JInYCM()
+    if pumvisible()
+        return "\<C-n>"
+    else
+        return "\<c-j>"
+    endif
+endfunction
+
+func! g:KInYCM()
+    if pumvisible()
+        return "\<C-p>"
+    else
+        return "\<c-k>"
+    endif
+endfunction
+inoremap <c-j> <c-r>=g:JInYCM()<cr>
+au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
+let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
+
+" 符号自动补全
+let g:delimitMate_expand_cr = 1
+let delimitMate_balance_matchpairs = 1
+let g:delimitMate_expand_space = 2
+imap <expr> <TAB> delimitMate#ShouldJump() ? "<Plug>delimitMateS-Tab" : "<TAB>"
+inoremap <expr> <S-Tab> delimitMate#JumpAny()
+
+" 快速跳转
+let g:EasyMotion_smartcase = 1
+"let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+" ,,h 显示往前可快速移动的点
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+" ,,j 显示往下可快速移动的点
+map <Leader><Leader>j <Plug>(easymotion-j)
+" ,,k 显示往上可快速移动的点
+map <Leader><Leader>k <Plug>(easymotion-k)
+" ,,l 显示往后可快速移动的点
+map <Leader><leader>l <Plug>(easymotion-lineforward)
+" ,,. 显示上一次可快速移动的点
+map <Leader><leader>. <Plug>(easymotion-repeat)
+
+
+" git 快捷操作
+" :Gdiff  :Gstatus :Gvsplit
+nnoremap <leader>gaa :Git add .<CR>
+nnoremap <leader>gc  :Gcommit<CR>
+nnoremap <leader>gp  :Gpush<CR>
+nnoremap <leader>gl  :Gpull<CR>
+nnoremap <leader>gb  :Gblame<CR>
+nnoremap <leader>gst :Gstatus<CR>
+nnoremap <leader>gd  :Gdiff<CR>
+nnoremap <leader>glg :Glog<CR>
+
+
+" multiplecursors 
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" 一些状态栏的颜色
+hi Pmenu      guifg=#F6F3E8 guibg=#444444
+" hi PmenuSel   guifg=#FFFFFF guibg=#0077DD
+hi PmenuSel   guifg=#FFFFFF guibg=#11AADD
+hi PMenuSbar  guibg=#5A647E
+hi PMenuThumb guibg=#AAAAAA
+" hi Visual     guibg=#1122FF
+" hi Visual     guibg=#0066FF
+hi Visual     guibg=#2566FA
+" hi VertSplit guibg=#272822
+hi VertSplit guibg=#1B1D1E
+hi Cursor    guibg=#FF0000
