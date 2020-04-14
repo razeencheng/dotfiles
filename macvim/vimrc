@@ -477,7 +477,7 @@ nmap <Leader>gol :GoLint<CR>
 let g:NERDTreeDirArrows = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let NERDTreeIgnore=['node_modules']
-
+let NERDTreeShowHidden=1
 
 " nerdtree-git-plugin 一些git状态符号
 let g:NERDTreeIndicatorMapCustom = {
