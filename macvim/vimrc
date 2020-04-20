@@ -424,13 +424,13 @@ let g:go_list_type = "quickfix"
 let g:go_def_mode = 'godef'
 
 " go 相关快捷键
-nmap <Leader>goc :GoErrCheck<CR>
-nmap <Leader>gob :GoBuild<CR>
-nmap <Leader>god :GoDoc<CR>
-nmap <Leader>got :GoTest<CR>
-nmap <Leader>goi :GoInstall<CR>
-nmap <Leader>gor :GoRename<CR>
-nmap <Leader>gol :GoLint<CR>
+nmap <Leader>gc :GoErrCheck<CR>
+nmap <Leader>gb :GoBuild<CR>
+nmap <Leader>gd :GoDoc<CR>
+nmap <Leader>gt :GoTest<CR>
+nmap <Leader>gi :GoInstall<CR>
+nmap <Leader>gr :GoRename<CR>
+nmap <Leader>gl :GoLint<CR>
 
 " function! OnGolangCompleteDone()
 "     if !exists('v:completed_item') || empty(v:completed_item)
@@ -480,7 +480,6 @@ let g:NERDTreeDirArrows = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let NERDTreeIgnore=['node_modules']
 let NERDTreeShowHidden=1
-
 
 " nerdtree-git-plugin 一些git状态符号
 let g:NERDTreeIndicatorMapCustom = {
@@ -762,14 +761,14 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 
 " git 快捷操作
 " :Gdiff  :Gstatus :Gvsplit
-nnoremap <leader>gaa :Git add .<CR>
-nnoremap <leader>gc  :Gcommit<CR>
-nnoremap <leader>gp  :Gpush<CR>
-nnoremap <leader>gl  :Gpull<CR>
-nnoremap <leader>gb  :Gblame<CR>
-nnoremap <leader>gst :Gstatus<CR>
-nnoremap <leader>gd  :Gdiff<CR>
-nnoremap <leader>glg :Glog<CR>
+nnoremap <leader>gtaa :Git add .<CR>
+nnoremap <leader>gtc  :Gcommit<CR>
+nnoremap <leader>gtp  :Gpush<CR>
+nnoremap <leader>gtl  :Gpull<CR>
+nnoremap <leader>gtb  :Gblame<CR>
+nnoremap <leader>gtst :Gstatus<CR>
+nnoremap <leader>gtd  :Gdiff<CR>
+nnoremap <leader>gtlg :Glog<CR>
 
 
 " multiplecursors 

@@ -71,23 +71,17 @@ vim一些基础操作可以看下图。
 | ,sa                  | 选择全部                   |      |
 | ,w                   | 保存当前文件               |      |
 | ,bd                  | 关闭但前缓冲区, 不关闭窗口 |      |
-| ,goc                 | GoErrCheck                 |      |
-| ,gob                 | GoBuild                    |      |
-| ,gor                 | GoRename                   |      |
-| ,gol                 | GoLint                     |      |
+| ,gc                 | GoErrCheck                 |      |
+| ,gb                 | GoBuild                    |      |
+| ,gr                 | GoRename                   |      |
+| ,gl                 | GoLint                     |      |
 | ,us                  | 修改当前文件类型的代码片段 |      |
 | ,,h                  | 显示往前可快速移动的点     |      |
 | ,,j                  | 显示往下可快速移动的点     |      |
 | ,,k                  | 显示往上可快速移动的点     |      |
 | ,,l                  | 显示往后可快速移动的点     |      |
 | ,,.                  | 显示上一次可快速移动的点   |      |
-| ,gaa                 | Git add                    |      |
-| ,gc                  | git commit                 |      |
-| ,gl                  | git pull                   |      |
+| ,gtaa                 | Git add                    |      |
+| ,gtc                  | git commit                 |      |
+| ,gtl                  | git pull                   |      |
 | ,bo                  | :BufOnly 关闭初当前Buffer外的所有Buffer |      |
-
-
-
-
-
-
