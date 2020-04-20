@@ -84,7 +84,7 @@ vim一些基础操作可以看下图。
 | ,gaa                 | Git add                    |      |
 | ,gc                  | git commit                 |      |
 | ,gl                  | git pull                   |      |
-
+| ,bo                  | :BufOnly 关闭初当前Buffer外的所有Buffer |      |
 
 
 

@@ -91,6 +91,8 @@ Plugin 'noahfrederick/vim-hemisu'
 Plugin 'tomasr/molokai'
 " 颜色主题
 Plugin 'zaki/zazen'
+" 关闭全部的Buff, 除了当前的
+Plugin 'vim-scripts/BufOnly.vim'
 
 " 插件结束的位置
 call vundle#end()
@@ -477,6 +479,7 @@ nmap <Leader>gol :GoLint<CR>
 let g:NERDTreeDirArrows = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let NERDTreeIgnore=['node_modules']
+let NERDTreeShowHidden=1
 
 
 " nerdtree-git-plugin 一些git状态符号
@@ -789,3 +792,6 @@ hi Visual     guibg=#2566FA
 " hi VertSplit guibg=#272822
 hi VertSplit guibg=#1B1D1E
 hi Cursor    guibg=#FF0000
+
+" 关闭初当前Buffer外的所有Buffer
+nmap <Leader>bo :BufOnly<CR>
