@@ -75,6 +75,7 @@ vim一些基础操作可以看下图。
 | ,gb                 | GoBuild                    |      |
 | ,gr                 | GoRename                   |      |
 | ,gl                 | GoLint                     |      |
+| ,gf                 | GoFillStruct                | 自动填充结构     |
 | ,us                  | 修改当前文件类型的代码片段 |      |
 | ,,h                  | 显示往前可快速移动的点     |      |
 | ,,j                  | 显示往下可快速移动的点     |      |

@@ -431,6 +431,7 @@ nmap <Leader>gt :GoTest<CR>
 nmap <Leader>gi :GoInstall<CR>
 nmap <Leader>gr :GoRename<CR>
 nmap <Leader>gl :GoLint<CR>
+nmap <Leader>gf :GoFillStruct<CR>
 
 " function! OnGolangCompleteDone()
 "     if !exists('v:completed_item') || empty(v:completed_item)
