@@ -8,6 +8,12 @@ curl -kSL https://raw.githubusercontent.com/razeencheng/dotfiles/master/macvim/i
 
 然后打开MacVim执行 ":PluginInstall"。
 
+需要提前安装‘Vundle’.
+
+``` bash
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+``` 
+
 
 ### QA
 
@@ -20,9 +26,18 @@ cd  ~/.vim/bundle/YouCompleteMe
 git clean -f
 git pull
 git submodule update --recursive --init
-/.vim/bundle/YouCompleteMe$ ../install.sh --clang-completer --go-completer
+/.vim/bundle/YouCompleteMe$ ../install.sh --go-completer
 ```
 
+如果没有 `cmake` 需要安装：
+
+``` bash
+# mac 
+brew install cmake
+
+# linux
+sudo apt install -y cmake
+```
 
 
 **Q2**. Cmd f 与MacVim系统按键冲突。
