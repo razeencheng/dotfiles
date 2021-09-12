@@ -214,7 +214,7 @@ set background=dark
 " 配色 terminal Color 256色
 set t_Co=256
 " 字体
-set guifont=CamingoCode\ Regular:h15
+set guifont=CamingoCode\ Regular:h14
 " 主题
 colorscheme molokai
 " colorscheme solarized
@@ -483,7 +483,7 @@ let NERDTreeIgnore=['node_modules']
 let NERDTreeShowHidden=1
 
 " nerdtree-git-plugin 一些git状态符号
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
